@@ -1,0 +1,178 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<link href="{{ asset('plateau.css') }}" type="text/css" rel="stylesheet">
+        <style>
+
+            #overlay {
+                position: fixed; /* Sit on top of the page content */
+                display: block; /* Hidden by default */
+                width: 100%; /* Full width (cover the whole page) */
+                height: 100%; /* Full height (cover the whole page) */
+                top: 80px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0,0,0,0); /* Black background with opacity */
+                z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+                cursor: pointer; /* Add a pointer on hover */
+            }
+
+        </style>
+
+    <div id="plateau">
+
+        {{ render(controller('App\\Controller\\GameController::refreshPlateauGame', {game:game.id})) }}
+
+    </div>
+    <br>
+    <h3 id="message" style="text-align: center"></h3>
+    <div id="overlay"></div>
+
+{% endblock %}
+
+{% block title %} Partie de jeu{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var fintour=0;
+        let boucle
+        $(document).ready(function(){
+            boucle = setInterval(refreshGame, 3000);
+
+            fin=setInterval(function (){
+                if(fintour==1) {
+                    document.getElementById("finDeTour").disabled = false;
+                }
+            })
+        })
+
+        $(document).on('click', '#finDeTour', function() {
+            $.ajax({
+                url: "{{ path('change_player', {game: game.id}) }}",
+                success: function(data) {
+                    if (data == true) {
+                        fintour=0
+                        document.getElementById("finDeTour").disabled = true;
+                        boucle = setInterval(refreshGame, 3000);
+                        document.getElementById("overlay").style.display = "block";
+                    }
+                },
+                error: function(){
+
+                }
+            })
+            $.ajax({
+                url: "{{ path('reset_pioche', {game: game.id}) }}",
+                success: function(data) {
+
+                },
+                error: function(){
+                }
+            })
+
+        })
+
+        function refreshGame() {
+            $.ajax({
+                url: "{{ path('get_tour', {game: game.id}) }}",
+                success: function(data) {
+                    console.log(data)
+                    if (data == false) {
+                        $('#message').html('A votre adversaire de jouer')
+                    } else {
+                        clearInterval(boucle)
+                        $.ajax({
+                            url:"{{ path('pioche',{game: game.id}) }}",
+                            success : function (data) {
+                                console.log('pioche');
+
+                            },
+                            error:function () {
+                            }
+                        })
+                        $('#plateau').load("{{ path('refresh_plateau_game', {game:game.id}) }}",function(responseTxt, statusTxt, xhr){
+                            if(statusTxt == "success")
+                                console.log("External content loaded successfully!")
+                            setTimeout(pioche(),9000)
+                            if(localStorage.getItem('{{game.id}}')==1){
+                                document.getElementById("finDeTour").disabled = false;
+                            }
+                            if(statusTxt == "error")
+                                console.log("Error: " + xhr.status + ": " + xhr.statusText);
+                        });
+
+                        $('#plateau').load("{{ path('refresh_plateau_game', {game:game.id}) }}")
+                        $('#message').html('A vous de jouer')
+                        document.getElementById("overlay").style.display = "none";
+                    }
+                },
+                error: function(){
+                }
+            })
+        }
+        let action
+        $(document).on('click', '#secret', function(){
+            console.log('secret')
+            action = 'secret' //mémorise l'action en cours
+            $('.choixSecret').show()
+            $('#valider').show()
+        })
+
+        $(document).on('click', '#depot', function(){
+            console.log('depot')
+            action = 'depot' //mémorise l'action en cours
+            $('.choixDepot').show()
+            $('#valider').show()
+        })
+        $(document).on('click', '#valider', function(){
+            switch (action) {
+                case 'secret':
+                    donneesAction = {
+                        action: 'secret',
+                        carte: $('input[name="carte_secret"]:checked').val()
+                    }
+
+                    break;
+                case 'depot':
+                    carte_number=2
+                    var array=[];
+                    $.each($("input[name='carte_depot']:checked"),function () {
+                        array.push($(this).val());
+                    })
+                    console.log(array[0]);
+                    donneesAction = {
+                        action: 'depot',
+                        carte1: array[0],
+                        carte2: array[1]
+                    }
+
+                    break;
+                case 'offre':
+
+                    break;
+                case 'echange':
+
+                    break;
+            }
+
+            $.ajax({
+                url: "{{ path('action_game', {game: game.id}) }}",
+                data: donneesAction,
+                method: 'POST',
+                success: function(data) {
+                    if (data == true) {
+                        $('#plateau').load("{{ path('refresh_plateau_game', {game:game.id}) }}")
+                        fintour=1;
+
+                    }
+                },
+                error: function(){
+
+                }
+            })
+
+        })
+
+    </script>
+{% endblock %}

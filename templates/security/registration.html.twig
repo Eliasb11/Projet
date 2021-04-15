@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Reggae+One&family=Sulphur+Point:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link href="{{ asset('inscription.css') }}" type="text/css" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %} Inscription {% endblock %}
+
+{% block body %}
+
+    <br>
+<div class="row">
+    <div class="col-2">
+
+    </div>
+
+
+{{ form_start(form , {'attr': {class:'col-8'}})  }}
+
+    <h1 class="h3 mb-3 font-weight-normal">Inscrivez-vous !! </h1>
+
+
+    <label for="">Prénom</label> <br>
+    {{ form_widget(form.firstname, {'attr': {class:'form-control'}}) }}
+
+    <br>
+
+    <label for="">Nom</label> <br>
+    {{ form_widget(form.lastname, {'attr': {class:'form-control'}}) }}
+    <br>
+
+    <label for="">Pseudo</label> <br>
+    {{ form_widget(form.pseudo, {'attr': {class:'form-control'}}) }}
+    <br>
+
+    <label for="">Adresse Mail</label><br>
+    {{ form_widget(form.email, {'attr': {class:'form-control'}}) }}
+
+    <br>
+    <label for="">Mot de Passe</label><br>
+    {{ form_widget(form.password, {'attr': {class:'form-control'}}) }}
+
+
+    <br>
+    <label for="">Date de Naissance</label><br>
+    {{ form_widget(form.birthday, {'attr': {class:'form-control none'}}) }}
+
+    <br>
+    <label for="">Captcha</label><br>
+    {{ form_widget(form.captcha, {'attr': {class:'form-control'}}) }}
+
+    <br>
+
+
+    <button id="envoyer" type="submit">S'Inscrire</button>
+
+
+
+    {{ form_end(form) }}
+    </div>
+{% endblock body %}
+

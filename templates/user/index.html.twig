@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Reggae+One&family=Sulphur+Point:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link href="{{ asset('profil.css') }}" type="text/css" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h2 style="text-align: center">Bienvenue à toi {{ app.user.pseudo }} </h2>
+    {% endif %}
+    <br><br><br>
+    <div class="row" id="info">
+
+        <div class="col-4"  id="bulle_info">
+            <h4 style="text-align: center">Vos Informations:</h4><br>
+            <h5>Nom: {{ app.user.lastName }}</h5>
+            <h5>Prénom: {{ app.user.firstName }}</h5>
+            <h5>Email: {{ app.user.email }}</h5>
+            <h5>Pseudo: {{ app.user.pseudo }}</h5>
+            <br>
+            <button type="button" id="modifier" data-toggle="modal" data-target="">
+                <a id="modif" style="color: white" href="{{ path('app_modifier') }}">Modifier</a>
+            </button>
+            <br><br>
+        </div>
+
+
+
+    <div class="col-4">
+
+    </div>
+
+    <div class="col-4" id="info_stat">
+        <h4 style="text-align: center">Vos Statistiques:</h4><br>
+        <h5>Nombre Victoire: {{ stats.victoire }}</h5>
+        <h5>Nombre Défaites: {{ stats.defaite }} </h5>
+        <h5>Parties Jouées: {{ stats.parties }}</h5>
+        <img src="../images/chaussons.png" id="chaussons">
+
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12" style="text-align: center; margin-top: 200px">
+            <button id="jouer_profil"><a href="{{ path('new_game') }}">JOUER</a></button>
+        </div>
+    </div>
+{% endblock %}
+

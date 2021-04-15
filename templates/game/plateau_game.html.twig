@@ -1,0 +1,91 @@
+
+<div class="row">
+
+
+    <div class="col-12" id="carte_adv">
+        {% for card in adversaire.handCards %}
+            <img style="width: 100px" src="{{ asset('cartes_main/dos.png')}}">
+        {% endfor %}
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-8">
+
+        <img style="width: 100px" src="{{ asset('cartes_plateau/saigo.png') }}">
+        <img style="width: 100px" src="{{ asset('cartes_plateau/miyaneko.png') }}">
+        <img style="width: 100px" src="{{ asset('cartes_plateau/nekonaga.png') }}">
+        <img style="width: 100px" src="{{ asset('cartes_plateau/toneko.png') }}">
+        <img style="width: 100px" src="{{ asset('cartes_plateau/nekoshan.png') }}">
+        <img style="width: 100px" src="{{ asset('cartes_plateau/nakano.png') }}">
+        <img style="width: 100px" src="{{ asset('cartes_plateau/minamoto.png') }}">
+
+    </div>
+
+    <div class="col-4">
+
+        <div class="jeton">
+        
+        <img src="{{ asset('images/jeton1_blanc.png')}}">
+        <img src="{{ asset('images/jeton2_blanc.png')}}">
+        <img src="{{ asset('images/jeton3_blanc.png')}}">
+        <img src="{{ asset('images/jeton4_blanc.png')}}">
+        
+        </div>
+
+        <div id="carte_dos">
+        
+            <img style="width: 100px" src="{{ asset('cartes_main/dos.png')}}">
+
+        </div>
+
+        <div class="jeton">
+        
+        <img src="{{ asset('images/jeton1_rouge.png')}}">
+        <img src="{{ asset('images/jeton2_rouge.png')}}">
+        <img src="{{ asset('images/jeton3_rouge.png')}}">
+        <img src="{{ asset('images/jeton4_rouge.png')}}">
+        
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+
+<div class="row">
+
+    <div class="col-8">
+        {% for card in moi.handCards %}
+            <input type="radio" name="carte_secret" value="{{ card }}"
+                   style="display: none"
+                   class="choixSecret">
+            <input type="checkbox" name="carte_depot" value="{{ card }}" style="display: none" class="choixDepot">
+        
+            <img style="width: 100px" src="{{ asset('cartes_main/'~cards[card].picture) }}">
+
+        {% endfor %}
+    </div>
+
+    <div class="col-4" id="actions">
+
+    <div id="bouton_actions">
+        <button id="secret"><img src="../../images/jeton1_blanc.png"></button>
+        <button  id="depot"><img src="../../images/jeton2_blanc.png"></button>
+        <button  id="offre"><img src="../../images/jeton3_blanc.png"></button>
+        <button  id="echange"><img src="../../images/jeton4_blanc.png"></button><br>
+    </div>
+
+    <div id="bouton_texte">
+        <button id="valider" style="display: none">Valider action</button>
+        <button id="finDeTour" disabled>Fin de tour</button>
+    </div>
+
+    </div>
+
+</div>
