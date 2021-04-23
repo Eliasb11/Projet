@@ -232,8 +232,7 @@ class GameController extends AbstractController
                 $game->getRounds()[0]->setPioche($pioche);
                 $entityManager->persist($game->getRounds()[0]);
                 $entityManager->flush();
-                $response=$cardRepository->findBy(array('id'=>$carte));
-                return $this->json([$response[0]->getId(),$response[0]->getPicture()]);
+
             }
         } elseif ($this->getUser()->getId() === $game->getUser2()->getId()) {
             if ($game->getRounds()[0]->getUser2Pioche() == 0) {
@@ -247,8 +246,7 @@ class GameController extends AbstractController
                 $game->getRounds()[0]->setPioche($pioche);
                 $entityManager->persist($game->getRounds()[0]);
                 $entityManager->flush();
-                $response=$cardRepository->findBy(array('id'=>$carte));
-                return $this->json([$response[0]->getId(),$response[0]->getPicture()]);
+
             }
         }
         return $this->json(true);
@@ -361,15 +359,15 @@ class GameController extends AbstractController
                     unset($main[$indexCarte]); //je supprime la carte de ma main
                     $round->setUser1HandCards($main);
                 }if ($joueur ===2){
-                    $actions = $round->getUser2Action(); //un tableau...
-                    $actions['DEPOT'] = [$carte1, $carte2]; //je sauvegarde la carte cachée dans mes actions
-                    $round->setUser2Action($actions); //je mets à jour le tableau
-                    $main = $round->getUser2HandCards();
-                    $indexCarte = array_search($carte2, $main); //je récupère l'index de la carte a supprimer dans ma main
-                    unset($main[$indexCarte]); //je supprime la carte de ma main
-                    $indexCarte = array_search($carte1, $main); //je récupère l'index de la carte a supprimer dans ma main
-                    unset($main[$indexCarte]); //je supprime la carte de ma main
-                    $round->setUser2HandCards($main);
+                $actions = $round->getUser2Action(); //un tableau...
+                $actions['DEPOT'] = [$carte1, $carte2]; //je sauvegarde la carte cachée dans mes actions
+                $round->setUser2Action($actions); //je mets à jour le tableau
+                $main = $round->getUser2HandCards();
+                $indexCarte = array_search($carte2, $main); //je récupère l'index de la carte a supprimer dans ma main
+                unset($main[$indexCarte]); //je supprime la carte de ma main
+                $indexCarte = array_search($carte1, $main); //je récupère l'index de la carte a supprimer dans ma main
+                unset($main[$indexCarte]); //je supprime la carte de ma main
+                $round->setUser2HandCards($main);
             }
                 break;
         }
@@ -401,7 +399,7 @@ class GameController extends AbstractController
         Game $game,
         EntityManagerInterface $entityManager
     ): Response {
-        if ($this->getUser()->getId() === $game->getUser1()->getId() && $game->getQuiJoue() === 1) {
+        if ($game->getQuiJoue() === 1) {
             if ($game->getRounds()[0]->getUser1Pioche() == 1) {
                 $game->getRounds()[0]->setUser1Pioche(0);
                 $entityManager->persist($game->getRounds()[0]);
@@ -409,7 +407,7 @@ class GameController extends AbstractController
             }
         }
 
-        if ($this->getUser()->getId() === $game->getUser2()->getId() && $game->getQuiJoue() === 2) {
+        if ($game->getQuiJoue() === 2) {
             if ($game->getRounds()[0]->getUser2Pioche() == 1) {
                 $game->getRounds()[0]->setUser2Pioche(0);
                 $entityManager->persist($game->getRounds()[0]);
@@ -419,6 +417,9 @@ class GameController extends AbstractController
 
         return $this->json(true);
     }
+
+
+
 
 
 }

@@ -15,7 +15,7 @@
 
 {% block body %}
 
-    <h2 style="text-align: center">Vous modifiez le profil de {{ app.user.firstname }} {{ app.user.lastname }}</h2>
+    <h2 style="text-align: center; margin-top: -40px">Vous modifiez le profil de {{ app.user.firstname }} {{ app.user.lastname }}</h2>
     <br>
     <div class="row">
         <div class="col-2">
@@ -46,8 +46,8 @@
         {{ form_widget(form.birthday, {'attr': {class:'form-control none'}}) }}
 
         <br>
-        <label for="">Mot de Passe</label><br>
-        {{ form_widget(form.password, {'attr': {class:'form-control none'}}) }}
+        <label for=""></label><br>
+        {{ form_widget(form.password, {'attr': {class:'form-control'}}) }}
 
 
         <br>

@@ -1,0 +1,64 @@
+body{
+    background-image: url(images/fond_nuage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Sulphur Point', sans-serif !important;
+}
+
+h1, h2{
+    font-family: 'Reggae One', cursive !important;
+}
+
+main.container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#formulaire{
+    background-color: white;
+    background-image: url(images/fond_login.png);
+    width: 500px; 
+    text-align: center; 
+    margin: auto; 
+    border-radius: 10px;
+    padding: 20px 0 20px 0;
+    border: 10px solid #a6a5a6;
+}
+
+a{
+    color: #8c1916;
+}
+
+a:hover{
+    color: #a6a5a6;
+}
+
+button#seconnecter{
+    border: none;
+    color: white;
+    background-color: #f7a431;
+    border-radius: 20px;
+}
+
+button#seconnecter:hover{
+    background-color: #8c1916;
+}
+
+footer{
+    background-color: #f7a431;
+    height: 70px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+#logo{
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+

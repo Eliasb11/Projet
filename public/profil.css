@@ -1,0 +1,110 @@
+body{
+    background-image: url(images/fond_profil.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    font-family: 'Sulphur Point', sans-serif !important;
+}
+
+h1, h2{
+    font-family: 'Reggae One', cursive !important;
+}
+
+main.container{
+    margin-top: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#bulle_info{
+    padding:7px 15px; 
+    border-radius:20px; 
+    width:350px;
+    left: 10%;
+    position: absolute;
+    transform: translate(-10%);
+    background-color: white;
+    background-image: url(images/fond_profil.png);
+    border-radius: 10px;
+    border: 10px solid #bee673;
+}
+
+#info{
+    margin: 0 0 100px 0;
+}
+
+#info_stat{
+    right: 10%;
+    position: absolute;
+    transform: translate(-10%);
+}
+
+a#modif{
+    color: #8c1916;
+    text-decoration: none;
+}
+
+a#modif:hover{
+    color: #a6a5a6;
+}
+
+button#modifier{
+    border: none;
+    color: white;
+    background-color: #f7a431;
+    border-radius: 20px;
+}
+
+button#modifier:hover{
+    background-color: #8c1916;
+}
+
+button#jouer_profil{
+    background-color: #f7a431;
+    border-radius: 50px;
+    border: none;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 999;
+    width: 40%;
+    margin-top: 50px;
+}
+
+button#jouer_profil a{
+    color: white;
+    text-decoration: none;
+    font-family: 'Reggae One', cursive;
+}
+
+button#jouer_profil:hover{
+    background-color: #8c1916;
+}
+
+button#jouer_profil a:hover{
+    color: white;
+}
+
+#chaussons{
+    width: 100%;
+    position: absolute;
+}
+
+footer{
+    background-color: #f7a431;
+    height: 70px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+#logo{
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+

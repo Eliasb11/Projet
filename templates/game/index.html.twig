@@ -45,6 +45,7 @@
 
 
 
+
     {% for game in en_cours %}
         <div  class="col-3" id="reprendre">
             <p>Crée le {{ game.created | date("d/m/Y") }}</p>
@@ -54,6 +55,7 @@
                 <p> Adversaire: {{ game.user1.firstname }} {{ game.user1.lastname }}</p>
             {% endif %}
             <a href="{{ path('show_game',{game: game.id}) }}">Reprendre</a>
+           
         </div>
 
     {% endfor %}

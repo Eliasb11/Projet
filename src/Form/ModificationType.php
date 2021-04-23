@@ -21,7 +21,7 @@ class ModificationType extends AbstractType
                 'type'=> PasswordType::class,
                 'required'=> true,
                 'invalid_message'=> 'Les mots de passe ne sont pas les même',
-                'first_options'=> array('label'=> 'Mot de passe '),
+                'first_options'=> array('label'=> 'Mot de passe'),
                 'second_options'=> array('label'=> 'Confirmer le mot de passe '),
             ))
             ->add('firstname')

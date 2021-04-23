@@ -1,0 +1,23 @@
+body{
+    font-family: 'Sulphur Point', sans-serif !important;
+}
+
+h1, h2{
+    font-family: 'Reggae One', cursive !important;
+}
+
+footer{
+    background-color: #f7a431;
+    height: 70px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+#logo{
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

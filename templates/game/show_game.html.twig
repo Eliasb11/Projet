@@ -9,13 +9,21 @@
                 display: block; /* Hidden by default */
                 width: 100%; /* Full width (cover the whole page) */
                 height: 100%; /* Full height (cover the whole page) */
-                top: 80px;
+                top: 73px;
                 left: 0;
                 right: 0;
-                bottom: 0;
-                background-color: rgba(0,0,0,0); /* Black background with opacity */
+
+                background-color: black;
+                opacity: 0.6;
+                /* Black background with opacity */
                 z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
                 cursor: pointer; /* Add a pointer on hover */
+            }
+
+            #message{
+                color: white;
+                opacity: 1;
+
             }
 
         </style>
@@ -26,8 +34,10 @@
 
     </div>
     <br>
-    <h3 id="message" style="text-align: center"></h3>
-    <div id="overlay"></div>
+
+    <div id="overlay">
+        <h1 id="message" style="text-align: center; margin-top: 20%"></h1>
+    </div>
 
 {% endblock %}
 
@@ -94,7 +104,6 @@
                         $('#plateau').load("{{ path('refresh_plateau_game', {game:game.id}) }}",function(responseTxt, statusTxt, xhr){
                             if(statusTxt == "success")
                                 console.log("External content loaded successfully!")
-                            setTimeout(pioche(),9000)
                             if(localStorage.getItem('{{game.id}}')==1){
                                 document.getElementById("finDeTour").disabled = false;
                             }
